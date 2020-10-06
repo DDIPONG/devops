@@ -15,17 +15,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.http import HttpResponse
+
+def empty_view(request):
+    return HttpResponse("Empty View")
 
 
 ##from bookmark.views import BookmarkLV, BookmarkDV -------Removed
 
 urlpatterns = [
+    path('', empty_view, name='empty view'),
     path('admin/', admin.site.urls),
     path('bookmark/', include('bookmark.urls')),
     path('blog/', include('blog.urls')),
 
 
     #class-based views
-    path('bookmark/', BookmarkLV.as_view(), name='index'),
-    path('bookmark/<int:pk>/', BookmarkDV.as_view(), name='detail'),
+    #path('bookmark/', BookmarkLV.as_view(), name='index'),
+    #path('bookmark/<int:pk>/', BookmarkDV.as_view(), name='detail'),
 ]
